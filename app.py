@@ -36,29 +36,35 @@ st.markdown(
         background: var(--eeos-bg) !important;
     }
 
-    header[data-testid="stHeader"] {
-        height: 2.1rem !important;
-        background: #07111f !important;
-    }
-
+    /* Ẩn header và toolbar mặc định của Streamlit.
+       Header tùy chỉnh của ứng dụng sẽ là lớp trên cùng duy nhất. */
+    header[data-testid="stHeader"],
+    [data-testid="stToolbar"],
     [data-testid="stDecoration"] {
         display: none !important;
     }
 
+    [data-testid="stAppViewContainer"] > .main {
+        padding-top: 0 !important;
+    }
+
     .block-container {
-        padding-top: 0.55rem !important;
+        padding-top: 0.35rem !important;
         padding-bottom: 1.4rem !important;
         max-width: 1680px !important;
     }
 
     /* Header giống mẫu: mảnh, không tạo card lớn */
     .eeos-topbar {
+        position: relative;
+        z-index: 20;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        min-height: 56px;
-        padding: 4px 6px 8px 6px;
+        min-height: 68px;
+        padding: 9px 6px 10px 6px;
         border-bottom: 1px solid #18304a;
+        overflow: visible !important;
     }
 
     .eeos-topbar-left {
@@ -74,13 +80,16 @@ st.markdown(
     }
 
     .eeos-topbar-title {
+        display: block;
         color: #f8fbff;
         font-family: "Segoe UI", Arial, sans-serif;
         font-size: clamp(1.35rem, 1.7vw, 1.95rem);
         font-weight: 800;
-        line-height: 1.15;
+        line-height: 1.42;
         letter-spacing: -0.015em;
         white-space: nowrap;
+        padding: 3px 0 4px 0;
+        overflow: visible !important;
     }
 
     .eeos-topbar-subtitle {
@@ -148,12 +157,14 @@ st.markdown(
     }
 
     .side-mini-title {
-        color: #70839d;
-        font-size: 0.58rem;
+        color: #6f829d;
+        font-size: 0.57rem;
         font-weight: 800;
-        letter-spacing: 0.11em;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        margin: 7px 7px 3px 7px;
+        margin: 12px 7px 5px 7px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid rgba(31, 53, 80, 0.55);
     }
 
     section[data-testid="stSidebar"] div[data-testid="stButton"] {
@@ -403,42 +414,76 @@ if uploaded is not None:
 
 
 MENU = [
-    ("TỔNG QUAN ĐIỀU HÀNH", [
-        ("⌂  Tổng quan điều hành", "command_center"),
-    ]),
-    ("CHIẾN LƯỢC & HIỆU QUẢ", [
-        ("⌁  Chiến lược & KPI", "strategy"),
-    ]),
-    ("THƯƠNG MẠI & TĂNG TRƯỞNG", [
-        ("⌁  Thương mại & Tăng trưởng", "commercial"),
-    ]),
-    ("TÀI CHÍNH & NGUỒN VỐN", [
-        ("⌁  Tài chính & Nguồn vốn", "finance"),
-    ]),
-    ("ĐẠI LÝ 360°", [
-        ("⌁  Đại lý 360°", "dealer_360"),
-    ]),
-    ("VẬN HÀNH & AFTERSALES", [
-        ("⌁  Vận hành & Aftersales", "operations"),
-    ]),
-    ("RỦI RO & KIỂM SOÁT", [
-        ("⌁  Rủi ro & Kiểm soát", "risk_governance"),
-    ]),
-    ("KỊCH BẢN", [
-        ("⌁  Kịch bản & Mô phỏng", "scenario_lab"),
-    ]),
-    ("QUẢN TRỊ DOANH NGHIỆP", [
-        ("⌁  Con người & ESG", "people_esg"),
-        ("⌁  Báo cáo Hội đồng", "board_reporting"),
-        ("⌁  Dữ liệu & Chất lượng", "data_quality"),
-        ("⌁  Trợ lý điều hành", "copilot"),
-    ]),
+    (
+        "ĐIỀU HÀNH",
+        [
+            ("⌂  Tổng quan điều hành", "command_center"),
+            ("⌁  Chiến lược & KPI", "strategy"),
+        ],
+    ),
+    (
+        "KINH DOANH & TÀI CHÍNH",
+        [
+            ("⌁  Thương mại & Tăng trưởng", "commercial"),
+            ("⌁  Tài chính & Nguồn vốn", "finance"),
+            ("⌁  Đại lý 360°", "dealer_360"),
+        ],
+    ),
+    (
+        "VẬN HÀNH & KIỂM SOÁT",
+        [
+            ("⌁  Vận hành & Aftersales", "operations"),
+            ("⌁  Rủi ro & Kiểm soát", "risk_governance"),
+            ("⌁  Kịch bản & Mô phỏng", "scenario_lab"),
+        ],
+    ),
+    (
+        "QUẢN TRỊ DOANH NGHIỆP",
+        [
+            ("⌁  Con người & ESG", "people_esg"),
+            ("⌁  Báo cáo Hội đồng", "board_reporting"),
+            ("⌁  Dữ liệu & Chất lượng", "data_quality"),
+            ("⌁  Trợ lý điều hành", "copilot"),
+        ],
+    ),
 ]
 
 if "module_v7_exact" not in st.session_state:
     st.session_state["module_v7_exact"] = "command_center"
 
 with st.sidebar:
+    st.markdown(
+        """
+        <div style="
+            display:flex;
+            align-items:center;
+            gap:9px;
+            padding:6px 7px 10px 7px;
+            margin-bottom:3px;
+            border-bottom:1px solid #1a3048;
+        ">
+            <div style="
+                display:grid;
+                place-items:center;
+                width:29px;
+                height:29px;
+                border-radius:8px;
+                background:linear-gradient(145deg,#2563EB,#6D28D9);
+                font-size:.88rem;
+            ">🚘</div>
+            <div>
+                <div style="color:#F8FAFC;font-size:.75rem;font-weight:800;line-height:1.15;">
+                    EEOS V7
+                </div>
+                <div style="color:#71839C;font-size:.56rem;line-height:1.2;margin-top:2px;">
+                    Trung tâm điều hành
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
     for group, entries in MENU:
         st.markdown(f'<div class="side-mini-title">{group}</div>', unsafe_allow_html=True)
         for label, module_name in entries:
