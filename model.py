@@ -74,8 +74,8 @@ def prepare(data: EEOSData) -> EEOSData:
     kpi = t["KPI"]
     kpi["Traffic Light"] = np.select(
         [kpi["Tỷ lệ hoàn thành"] >= 1.0, kpi["Tỷ lệ hoàn thành"] >= 0.9],
-        ["Green", "Amber"],
-        default="Red",
+        ["Xanh", "Vàng"],
+        default="Đỏ",
     )
     return data
 
@@ -149,8 +149,8 @@ def dynamic_ews(data: EEOSData, weights: dict) -> pd.DataFrame:
     )
     h["Dynamic Level"] = np.select(
         [h["Dynamic EWS"] >= 75, h["Dynamic EWS"] >= 60],
-        ["Red", "Amber"],
-        default="Green",
+        ["Đỏ", "Vàng"],
+        default="Xanh",
     )
     return h.sort_values("Dynamic EWS", ascending=False)
 

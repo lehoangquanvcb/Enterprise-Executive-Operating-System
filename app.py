@@ -1,71 +1,71 @@
 
 from io import BytesIO
 import streamlit as st
-from config import APP_NAME, APP_SUBTITLE, VERSION, AUTHOR, MASTER_FILE
+from config import TEN_UNG_DUNG, PHU_DE, PHIEN_BAN, TAC_GIA, FILE_MASTER
 from model import load_master, prepare
-from ui import inject_css
-from components.filters import global_filters
+from ui import chen_css
+from components.filters import bang_dieu_khien_ngang
 
 st.set_page_config(
-    page_title=APP_NAME,
+    page_title=TEN_UNG_DUNG,
     page_icon="🚘",
     layout="wide",
     initial_sidebar_state="expanded",
 )
-inject_css()
+chen_css()
 
 @st.cache_data(show_spinner=False)
-def load_data(file_bytes=None):
-    return prepare(load_master(BytesIO(file_bytes) if file_bytes else MASTER_FILE))
+def tai_du_lieu(file_bytes=None):
+    return prepare(load_master(BytesIO(file_bytes) if file_bytes else FILE_MASTER))
 
-with st.sidebar:
-    st.title("🚘 EEOS")
-    st.caption(f"{VERSION}")
-    st.caption(APP_SUBTITLE)
-    st.caption(f"Author: {AUTHOR}")
-    uploaded = st.file_uploader("Upload Master Excel V6", type=["xlsx"])
-    st.download_button(
-        "Download Master Excel V6",
-        MASTER_FILE.read_bytes(),
-        MASTER_FILE.name,
-        use_container_width=True,
-    )
-
+# Load default first so horizontal panel can be shown.
 try:
-    raw_data = load_data(uploaded.getvalue() if uploaded else None)
+    du_lieu_goc = tai_du_lieu()
 except Exception as exc:
-    st.error(f"Workbook loading error: {exc}")
+    st.error(f"Lỗi tải file Master mặc định: {exc}")
     st.stop()
 
-data, scenario = global_filters(raw_data)
+st.markdown(f"## 🚘 {TEN_UNG_DUNG}")
+st.caption(f"{PHU_DE} · {PHIEN_BAN} · Tác giả: {TAC_GIA}")
 
-navigation = {
-    "Executive Command Center":"command_center",
-    "Strategy & Performance":"strategy",
-    "Commercial & Growth":"commercial",
-    "Finance & Treasury":"finance",
-    "Dealer 360°":"dealer_360",
-    "Operations & Aftersales":"operations",
-    "Risk & Governance":"risk_governance",
-    "Scenario Lab":"scenario_lab",
-    "People & ESG":"people_esg",
-    "Board Reporting":"board_reporting",
-    "Data Quality":"data_quality",
-    "Executive Copilot":"copilot",
+du_lieu_loc, kich_ban, uploaded, ky_bao_cao, che_do_xem = bang_dieu_khien_ngang(du_lieu_goc)
+
+if uploaded is not None:
+    try:
+        du_lieu_tai_len = tai_du_lieu(uploaded.getvalue())
+        du_lieu_loc, kich_ban, _, ky_bao_cao, che_do_xem = bang_dieu_khien_ngang(du_lieu_tai_len)
+    except Exception as exc:
+        st.error(f"File tải lên không hợp lệ: {exc}")
+        st.stop()
+
+dieu_huong = {
+    "🏠 Tổng quan Điều hành":"command_center",
+    "🎯 Chiến lược & Hiệu quả":"strategy",
+    "📈 Thương mại & Tăng trưởng":"commercial",
+    "💰 Tài chính & Nguồn vốn":"finance",
+    "🏢 Đại lý 360°":"dealer_360",
+    "🛠️ Vận hành & Aftersales":"operations",
+    "🛡️ Rủi ro & Kiểm soát":"risk_governance",
+    "🧪 Phòng thí nghiệm Kịch bản":"scenario_lab",
+    "👥 Con người & ESG":"people_esg",
+    "📄 Báo cáo HĐQT":"board_reporting",
+    "🗂️ Chất lượng Dữ liệu":"data_quality",
+    "🤖 Trợ lý Điều hành":"copilot",
 }
 
 with st.sidebar:
-    st.markdown('<div class="section-label">Navigation</div>', unsafe_allow_html=True)
-    selected = st.radio("Module", list(navigation), label_visibility="collapsed")
-    st.caption("All operating and financial figures are synthetic.")
+    st.markdown("### Điều hướng")
+    lua_chon = st.radio("Module", list(dieu_huong), label_visibility="collapsed")
+    st.divider()
+    st.caption("Dữ liệu tài chính, vận hành và khách hàng đều là dữ liệu giả lập.")
 
 try:
-    module = __import__(f"modules.{navigation[selected]}", fromlist=["render"])
-    module.render(data, scenario)
+    module = __import__(f"modules.{dieu_huong[lua_chon]}", fromlist=["render"])
+    module.render(du_lieu_loc, kich_ban)
 except Exception as exc:
-    st.error(f"Module error: {exc}")
-    with st.expander("Technical details"):
+    st.error(f"Lỗi tại module: {exc}")
+    with st.expander("Chi tiết kỹ thuật"):
         st.exception(exc)
 
 st.divider()
-st.caption("Enterprise simulation · Synthetic demonstration data · Author: Le Hoang Quan")
+st.caption(f"Hệ thống Điều hành Doanh nghiệp · {PHIEN_BAN} · Tác giả: {TAC_GIA}")

@@ -2,10 +2,10 @@
 import plotly.graph_objects as go
 import streamlit as st
 from model import scenario_output
-from ui import page_header, metric_row, dark_chart
+from ui import tieu_de_trang, dong_chi_so, bieu_do_toi, hien_thi_bang
 
 def render(data, scenario):
-    page_header("Scenario Lab", "Interactive revenue, EBITDA and cash sensitivity")
+    tieu_de_trang("Phòng thí nghiệm Kịch bản", "Mô phỏng độ nhạy doanh thu, EBITDA và tiền mặt")
     presets = {
         "Base": (0.08, 0.02, 0.00, 0.11, 0.07, 10),
         "Upside": (0.16, 0.035, -0.007, 0.18, 0.06, 20),
@@ -13,25 +13,25 @@ def render(data, scenario):
     }
     preset = presets[scenario]
     a, b, c = st.columns(3)
-    volume = a.slider("Vehicle volume change", -30, 30, int(preset[0]*100)) / 100
-    price = b.slider("Price / mix change", -10, 10, int(preset[1]*100)) / 100
-    discount = c.slider("Additional discount", -5, 8, int(preset[2]*100)) / 100
+    volume = a.slider("Thay đổi sản lượng xe", -30, 30, int(preset[0]*100)) / 100
+    price = b.slider("Thay đổi giá / cơ cấu", -10, 10, int(preset[1]*100)) / 100
+    discount = c.slider("Chiết khấu bổ sung", -5, 8, int(preset[2]*100)) / 100
     a, b, c = st.columns(3)
-    service = a.slider("Aftersales growth", -20, 40, int(preset[3]*100)) / 100
-    personnel = b.slider("Personnel cost growth", -10, 25, int(preset[4]*100)) / 100
-    inventory = c.slider("Inventory days reduction", 0, 40, preset[5])
+    service = a.slider("Tăng trưởng aftersales", -20, 40, int(preset[3]*100)) / 100
+    personnel = b.slider("Tăng chi phí nhân sự", -10, 25, int(preset[4]*100)) / 100
+    inventory = c.slider("Giảm số ngày tồn kho", 0, 40, preset[5])
     result = scenario_output(data, volume, price, discount, service, personnel, inventory)
-    metric_row([
-        ("Simulated revenue", f"{result['revenue']:,.1f} bn",
+    dong_chi_so([
+        ("Doanh thu mô phỏng", f"{result['revenue']:,.1f} tỷ",
          f"{result['revenue']/result['base_revenue']-1:.1%}"),
-        ("Simulated EBITDA", f"{result['ebitda']:,.1f} bn",
-         f"{result['ebitda']-result['base_ebitda']:,.1f} bn"),
-        ("EBITDA margin", f"{result['margin']:.1%}", None),
-        ("Cash released", f"{result['cash_release']:,.1f} bn", None),
+        ("EBITDA mô phỏng", f"{result['ebitda']:,.1f} tỷ",
+         f"{result['ebitda']-result['base_ebitda']:,.1f} tỷ"),
+        ("Biên EBITDA", f"{result['margin']:.1%}", None),
+        ("Tiền mặt giải phóng", f"{result['cash_release']:,.1f} tỷ", None),
     ])
     pnl = data.tables["Dealer_PnL"]
     fig = go.Figure(go.Waterfall(
-        x=["Base EBITDA","Volume","Price / Mix","Discount","Aftersales","Personnel","Simulated EBITDA"],
+        x=["EBITDA cơ sở","Sản lượng","Giá / Cơ cấu","Chiết khấu","Aftersales","Nhân sự","EBITDA mô phỏng"],
         y=[
             result["base_ebitda"],
             result["base_revenue"] * volume * 0.075,
@@ -43,9 +43,6 @@ def render(data, scenario):
         ],
         measure=["absolute","relative","relative","relative","relative","relative","total"],
     ))
-    st.plotly_chart(dark_chart(fig, "Scenario EBITDA Bridge"), use_container_width=True)
-    st.dataframe(
-        data.tables["Scenario_Drivers"][data.tables["Scenario_Drivers"]["Scenario"] == scenario],
-        use_container_width=True, hide_index=True
-    )
-    st.info("Synthetic management sensitivity model; not a statutory forecast.")
+    st.plotly_chart(bieu_do_toi(fig, "Cầu nối EBITDA theo kịch bản"), use_container_width=True)
+    hien_thi_bang(data.tables["Scenario_Drivers"][data.tables["Scenario_Drivers"]["Scenario"] == scenario])
+    st.info("Đây là mô hình độ nhạy quản trị sử dụng dữ liệu giả lập, không phải dự báo pháp định.")

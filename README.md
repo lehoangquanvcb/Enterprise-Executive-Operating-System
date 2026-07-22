@@ -1,54 +1,37 @@
 
-# Enterprise Executive Operating System — V6
+# Hệ thống Điều hành Doanh nghiệp — V7
 
-**Author: Le Hoang Quan**
+**Tác giả: Lê Hoàng Quân**
 
-V6 consolidates the strongest parts of V1–V5 and removes duplicated or unstable elements.
+## Nâng cấp trọng yếu của V7
 
-## What was fixed
+- Việt hóa toàn bộ menu, tiêu đề, tab, nút, thông báo, KPI và phần lớn tên cột hiển thị.
+- Sidebar chỉ còn chức năng điều hướng.
+- Upload Master Excel, bộ lọc Thương hiệu, Đại lý, Kịch bản, Kỳ báo cáo và Chế độ xem được chuyển lên panel ngang.
+- Giữ nguyên dark theme, bộ dữ liệu 47 sheet, Dealer Health Score, Dynamic EWS, Scenario Lab, Board Reporting và Executive Copilot.
+- Kế thừa các sửa lỗi của V6:
+  - Không sử dụng thư mục `pages/`.
+  - Một router duy nhất.
+  - Forecast dùng đúng các cột thực tế.
+  - KPI Traffic Light được tính tự động.
+  - Lỗi của một module không làm toàn bộ app dừng.
 
-- Corrected Strategy forecast charts to use the actual workbook columns:
-  `Doanh thu hợp nhất`, `EBITDA`, and `Loại dữ liệu`.
-- Removed the reserved Streamlit `pages/` directory and retained one router only.
-- Consolidated Risk, Audit, Policy, Controls and Action Impact into one governance module.
-- Removed repeated action tables from unrelated modules.
-- Derived KPI traffic lights from KPI attainment instead of assuming nonexistent status labels.
-- Added application-level exception handling so one chart cannot crash the entire app.
-- Added `Module_Map` and `App_Config` sheets to the Master Excel.
-
-## V6 modules
-
-1. Executive Command Center
-2. Strategy & Performance
-3. Commercial & Growth
-4. Finance & Treasury
-5. Dealer 360°
-6. Operations & Aftersales
-7. Risk & Governance
-8. Scenario Lab
-9. People & ESG
-10. Board Reporting
-11. Data Quality
-12. Executive Copilot
-
-## Run locally
+## Chạy trên máy
 
 ```bash
 python -m pip install -r requirements.txt
 python -m streamlit run app.py
 ```
 
-## Update the existing GitHub repository
-
-Delete the old extracted project files, copy the full V6 contents into the repository folder, then run:
+## Cập nhật repository hiện tại
 
 ```bash
 git add .
-git commit -m "Release V6 Consolidated Enterprise Edition"
+git commit -m "Release V7 Vietnamese Horizontal Control Panel"
 git push
 ```
 
-## New repository workflow
+## Tạo repository mới
 
 ```bash
 git init
@@ -58,5 +41,3 @@ git commit -m "Initial release of Enterprise Executive Operating System"
 git remote add origin https://github.com/lehoangquanvcb/Enterprise-Executive-Operating-System.git
 git push -u origin main
 ```
-
-All financial, operating and customer data are synthetic.

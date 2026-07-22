@@ -1,30 +1,30 @@
 
 import streamlit as st
 from model import validate_data
-from ui import page_header, metric_row
+from ui import tieu_de_trang, dong_chi_so, hien_thi_bang
 
 def render(data, scenario):
-    page_header("Data Quality", "Validation, lineage, master data and workbook inventory")
+    tieu_de_trang("Chất lượng Dữ liệu", "Kiểm tra dữ liệu, dòng dữ liệu, dữ liệu chủ và danh mục workbook")
     score, issues = validate_data(data)
-    metric_row([
-        ("Readiness", f"{score}/100", None),
-        ("Critical", int((issues["Severity"] == "Critical").sum()) if len(issues) else 0, None),
-        ("High", int((issues["Severity"] == "High").sum()) if len(issues) else 0, None),
-        ("Validation rules", len(data.tables["Validation_Rules"]), None),
+    dong_chi_so([
+        ("Điểm sẵn sàng", f"{score}/100", None),
+        ("Lỗi nghiêm trọng", int((issues["Severity"] == "Critical").sum()) if len(issues) else 0, None),
+        ("Cảnh báo mức cao", int((issues["Severity"] == "High").sum()) if len(issues) else 0, None),
+        ("Số quy tắc kiểm tra", len(data.tables["Validation_Rules"]), None),
     ])
-    tabs = st.tabs(["Results","Rules","Lineage","Master Data","Workbook Inventory"])
+    tabs = st.tabs(["Kết quả","Danh mục quy tắc","Dòng dữ liệu","Dữ liệu chủ","Danh mục Workbook"])
     with tabs[0]:
         if len(issues):
-            st.dataframe(issues, use_container_width=True, hide_index=True)
+            hien_thi_bang(issues)
         else:
-            st.success("All automated validation checks passed.")
+            st.success("Toàn bộ kiểm tra dữ liệu tự động đã đạt yêu cầu.")
     with tabs[1]:
-        st.dataframe(data.tables["Validation_Rules"], use_container_width=True, hide_index=True)
+        hien_thi_bang(data.tables["Validation_Rules"])
     with tabs[2]:
-        st.dataframe(data.tables["Data_Lineage"], use_container_width=True, hide_index=True)
+        hien_thi_bang(data.tables["Data_Lineage"])
     with tabs[3]:
-        st.dataframe(data.tables["Don_vi"], use_container_width=True, hide_index=True)
+        hien_thi_bang(data.tables["Don_vi"])
     with tabs[4]:
         inventory = [{"Sheet": name, "Rows": len(df), "Columns": len(df.columns)}
                      for name, df in data.tables.items()]
-        st.dataframe(inventory, use_container_width=True, hide_index=True)
+        hien_thi_bang(__import__("pandas").DataFrame(inventory))

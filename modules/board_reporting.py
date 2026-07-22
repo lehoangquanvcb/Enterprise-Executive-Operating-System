@@ -3,32 +3,32 @@ import io
 import zipfile
 import streamlit as st
 from model import enterprise_metrics, dealer_health
-from ui import page_header
+from ui import tieu_de_trang, hien_thi_bang
 
 def render(data, scenario):
-    page_header("Board Reporting", "Create an executive summary and supporting reporting schedules")
+    tieu_de_trang("Báo cáo HĐQT", "Tạo bản tóm tắt điều hành và các phụ lục báo cáo")
     metrics = enterprise_metrics(data)
     map_df = data.tables["Board_Pack_Map"]
     selected = st.multiselect(
-        "Board-pack sections",
+        "Chọn các phần của gói báo cáo",
         map_df["Section"].tolist(),
         default=map_df[map_df["Requirement"] == "Mandatory"]["Section"].tolist(),
     )
-    st.dataframe(map_df[map_df["Section"].isin(selected)], use_container_width=True, hide_index=True)
+    hien_thi_bang(map_df[map_df["Section"].isin(selected)])
 
-    summary = f"""# Enterprise Executive Board Pack
+    summary = f"""# Gói Báo cáo Điều hành HĐQT
 
-Scenario: {scenario}
+Kịch bản: {scenario}
 
-## Executive Summary
-- Revenue: {metrics['revenue']:,.1f} bn VND
-- EBITDA: {metrics['ebitda']:,.1f} bn VND
-- EBITDA margin: {metrics['margin']:.1%}
-- Minimum projected cash: {metrics['cash_min']:,.1f} bn VND
-- Red EWS dealers: {metrics['red_ews']}
-- Discount leakage: {metrics['discount_leakage']:,.2f} bn VND
-- Overdue actions: {metrics['overdue_actions']}
-- Pending decisions: {metrics['pending_decisions']}
+## Tóm tắt điều hành
+- Doanh thu: {metrics['revenue']:,.1f} tỷ đồng
+- EBITDA: {metrics['ebitda']:,.1f} tỷ đồng
+- Biên EBITDA: {metrics['margin']:.1%}
+- Tiền mặt thấp nhất dự kiến: {metrics['cash_min']:,.1f} tỷ đồng
+- Số đại lý cảnh báo đỏ: {metrics['red_ews']}
+- Rò rỉ chiết khấu: {metrics['discount_leakage']:,.2f} tỷ đồng
+- Hành động quá hạn: {metrics['overdue_actions']}
+- Quyết định đang chờ: {metrics['pending_decisions']}
 
 """
     mapping = {
@@ -44,19 +44,18 @@ Scenario: {scenario}
     }
     package = io.BytesIO()
     with zipfile.ZipFile(package, "w", zipfile.ZIP_DEFLATED) as archive:
-        archive.writestr("00_Executive_Summary.md", summary)
-        archive.writestr("01_Dealer_Health.csv", dealer_health(data).to_csv(index=False))
+        archive.writestr("00_Tom_tat_Dieu_hanh.md", summary)
+        archive.writestr("01_Suc_khoe_Dai_ly.csv", dealer_health(data).to_csv(index=False))
         for section in selected:
-            summary += f"## {section}\nSee supporting schedule in the reporting package.\n\n"
             if section in mapping:
                 archive.writestr(
                     section.replace(" ", "_") + ".csv",
                     data.tables[mapping[section]].to_csv(index=False),
                 )
     st.download_button(
-        "Download Board Reporting Bundle",
+        "Tải gói Báo cáo HĐQT",
         package.getvalue(),
-        "EEOS_V6_Board_Reporting.zip",
+        "EEOS_V7_Bao_cao_HDQT.zip",
         "application/zip",
         use_container_width=True,
     )
