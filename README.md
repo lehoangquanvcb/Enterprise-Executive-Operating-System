@@ -1,23 +1,27 @@
 
-# Enterprise Executive Operating System V4
+# Enterprise Executive Operating System — V5 Full
 
 **Author: Le Hoang Quan**
 
-V4 is a dark-theme, modular executive operating platform for a synthetic multi-brand automotive retail group.
+This release fixes the Streamlit auto-page conflict in V4 by removing the reserved `pages/` directory and using one internal router with modules stored under `modules/`.
 
-## Core upgrades
+## Ready-to-use modules
 
-- Executive Navy Dark theme
-- Modular multipage-style navigation
-- Shared global filters for brand, dealer and scenario
-- Dealer 360° drill-down
-- Dynamic Early-Warning Engine with adjustable weights
-- What-if simulator for revenue, margin, inventory and cash
-- Action Impact Tracker
-- Board Pack Generator
-- Data Validation Center
-- Executive Copilot
-- 44-sheet Master Excel data model
+1. Executive Command Center
+2. Strategy & Performance
+3. Commercial & Growth
+4. Finance & Treasury
+5. Dealer 360°
+6. Operations & Aftersales
+7. Risk & Resilience
+8. Governance & Execution
+9. What-if Simulator
+10. People & ESG
+11. Board Pack Generator
+12. Data Quality
+13. Executive Copilot
+
+Each module contains populated KPI cards, charts, drill-down tables and downloads. The Board Pack Generator exports a ZIP bundle with an executive summary and supporting CSV schedules.
 
 ## Run locally
 
@@ -26,7 +30,7 @@ python -m pip install -r requirements.txt
 python -m streamlit run app.py
 ```
 
-## Git workflow
+## Git
 
 ```bash
 git init
@@ -37,12 +41,10 @@ git remote add origin https://github.com/lehoangquanvcb/Enterprise-Executive-Ope
 git push -u origin main
 ```
 
-For updates:
+Existing repository:
 
 ```bash
 git add .
-git commit -m "Release V4"
+git commit -m "Release V5 Full"
 git push
 ```
-
-All performance, financial and operational data are synthetic.

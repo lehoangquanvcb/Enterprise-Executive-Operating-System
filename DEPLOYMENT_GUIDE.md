@@ -1,16 +1,21 @@
 
-# Deployment Guide – V4
+# Deployment Guide
 
-## Local test
-
+## Local verification
 ```bash
 cd /d E:\Enterprise-Executive-Operating-System
 python -m pip install -r requirements.txt
 python -m streamlit run app.py
 ```
 
-## First push
+## Existing repository update
+```bash
+git add .
+git commit -m "Release V5 Full"
+git push
+```
 
+## New repository
 ```bash
 git init
 git branch -M main
@@ -20,16 +25,7 @@ git remote add origin https://github.com/lehoangquanvcb/Enterprise-Executive-Ope
 git push -u origin main
 ```
 
-## Existing repository update
-
-```bash
-git add .
-git commit -m "Release V4"
-git push
-```
-
-## Streamlit Cloud
-
-- Repository: `lehoangquanvcb/Enterprise-Executive-Operating-System`
-- Branch: `main`
-- Main file path: `app.py`
+Streamlit Cloud:
+- Repository: lehoangquanvcb/Enterprise-Executive-Operating-System
+- Branch: main
+- Main file: app.py
