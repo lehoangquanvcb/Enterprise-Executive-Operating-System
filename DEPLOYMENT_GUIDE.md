@@ -1,37 +1,35 @@
 
-# HƯỚNG DẪN ĐƯA HTA-EOS LÊN GITHUB VÀ STREAMLIT
+# Deployment Guide – V4
 
-## 1. Tạo GitHub repository
+## Local test
 
-Tên gợi ý:
+```bash
+cd /d E:\Enterprise-Executive-Operating-System
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
+```
 
-`hta-enterprise-executive-operating-system`
-
-## 2. Upload package
-
-Tại thư mục dự án:
+## First push
 
 ```bash
 git init
-git add .
-git commit -m "Initial HTA-EOS release"
 git branch -M main
-git remote add origin https://github.com/<username>/hta-enterprise-executive-operating-system.git
+git add .
+git commit -m "Initial release of Enterprise Executive Operating System"
+git remote add origin https://github.com/lehoangquanvcb/Enterprise-Executive-Operating-System.git
 git push -u origin main
 ```
 
-## 3. Streamlit Community Cloud
+## Existing repository update
 
-- New app
-- Repository: repository vừa tạo
+```bash
+git add .
+git commit -m "Release V4"
+git push
+```
+
+## Streamlit Cloud
+
+- Repository: `lehoangquanvcb/Enterprise-Executive-Operating-System`
 - Branch: `main`
 - Main file path: `app.py`
-- Deploy
-
-## 4. Cập nhật dữ liệu
-
-Chỉ cần thay nội dung trong Master Excel hoặc upload Master Excel mới trên sidebar của ứng dụng.
-
-## 5. Lưu ý bảo mật
-
-Dự án hiện dùng dữ liệu giả định. Không upload dữ liệu nội bộ, dữ liệu khách hàng hoặc dữ liệu tài chính thật lên repository công khai.
