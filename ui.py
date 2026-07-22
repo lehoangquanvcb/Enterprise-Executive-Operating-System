@@ -80,6 +80,10 @@ DOI_GIA_TRI = {
     "Dealer 360": "Đại lý 360°",
     "Risk & EWS": "Rủi ro & Cảnh báo sớm",
     "Chairman Office": "Văn phòng Chủ tịch",
+    "Project delivery, CAPEX and investment decisions":
+        "Tiến độ dự án, CAPEX và các quyết định đầu tư",
+    "People / ESG": "Con người / ESG",
+    "PMO & Investment": "Quản lý dự án & Đầu tư",
     "Revenue, EBITDA, liquidity, EWS and decisions":
         "Doanh thu, EBITDA, thanh khoản, cảnh báo sớm và quyết định",
     "Strategy map, KPI attainment and key gaps":

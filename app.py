@@ -175,6 +175,51 @@ st.markdown(
         line-height: 1.12 !important;
     }
 
+
+    /* Căn toàn bộ menu theo đúng một lề trái */
+    section[data-testid="stSidebar"] div[data-testid="stButton"] button {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        padding-left: 30px !important;
+        padding-right: 8px !important;
+        text-align: left !important;
+    }
+
+    section[data-testid="stSidebar"] div[data-testid="stButton"] button::before {
+        content: "›";
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-52%);
+        width: 11px;
+        color: #7F91AA;
+        font-size: 0.84rem;
+        font-weight: 800;
+        line-height: 1;
+        text-align: center;
+    }
+
+    section[data-testid="stSidebar"] div[data-testid="stButton"] button[kind="primary"]::before {
+        content: "⌂";
+        color: #DCEBFF;
+        font-size: 0.72rem;
+    }
+
+    section[data-testid="stSidebar"] div[data-testid="stButton"] button p,
+    section[data-testid="stSidebar"] div[data-testid="stButton"] button span {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        white-space: normal !important;
+        line-height: 1.22 !important;
+    }
+
     section[data-testid="stSidebar"] div[data-testid="stButton"] button[kind="secondary"] {
         color: #c8d4e3 !important;
         background: transparent !important;
@@ -407,18 +452,18 @@ if uploaded is not None:
 
 
 MENU = [
-    ("⌂  Tổng quan điều hành", "command_center"),
-    ("⌁  Chiến lược & Hiệu quả", "strategy"),
-    ("⌁  Thương mại & Tăng trưởng", "commercial"),
-    ("⌁  Tài chính & Nguồn vốn", "finance"),
-    ("⌁  Đại lý 360°", "dealer_360"),
-    ("⌁  Vận hành & Aftersales", "operations"),
-    ("⌁  Rủi ro & Kiểm soát", "risk_governance"),
-    ("⌁  Kịch bản & Mô phỏng", "scenario_lab"),
-    ("⌁  Con người & ESG", "people_esg"),
-    ("⌁  Báo cáo HĐQT", "board_reporting"),
-    ("⌁  Dữ liệu & Chất lượng", "data_quality"),
-    ("⌁  Trợ lý điều hành", "copilot"),
+    ("Tổng quan điều hành", "command_center"),
+    ("Chiến lược & Hiệu quả", "strategy"),
+    ("Thương mại & Tăng trưởng", "commercial"),
+    ("Tài chính & Nguồn vốn", "finance"),
+    ("Đại lý 360°", "dealer_360"),
+    ("Vận hành & Aftersales", "operations"),
+    ("Rủi ro & Kiểm soát", "risk_governance"),
+    ("Kịch bản & Mô phỏng", "scenario_lab"),
+    ("Con người & ESG", "people_esg"),
+    ("Báo cáo HĐQT", "board_reporting"),
+    ("Dữ liệu & Chất lượng", "data_quality"),
+    ("Trợ lý điều hành", "copilot"),
 ]
 
 if "module_v7_exact" not in st.session_state:
