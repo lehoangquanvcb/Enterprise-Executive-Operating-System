@@ -157,14 +157,7 @@ st.markdown(
     }
 
     .side-mini-title {
-        color: #6f829d;
-        font-size: 0.57rem;
-        font-weight: 800;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        margin: 12px 7px 5px 7px;
-        padding-bottom: 4px;
-        border-bottom: 1px solid rgba(31, 53, 80, 0.55);
+        display: none !important;
     }
 
     section[data-testid="stSidebar"] div[data-testid="stButton"] {
@@ -414,38 +407,18 @@ if uploaded is not None:
 
 
 MENU = [
-    (
-        "ĐIỀU HÀNH",
-        [
-            ("⌂  Tổng quan điều hành", "command_center"),
-            ("⌁  Chiến lược & KPI", "strategy"),
-        ],
-    ),
-    (
-        "KINH DOANH & TÀI CHÍNH",
-        [
-            ("⌁  Thương mại & Tăng trưởng", "commercial"),
-            ("⌁  Tài chính & Nguồn vốn", "finance"),
-            ("⌁  Đại lý 360°", "dealer_360"),
-        ],
-    ),
-    (
-        "VẬN HÀNH & KIỂM SOÁT",
-        [
-            ("⌁  Vận hành & Aftersales", "operations"),
-            ("⌁  Rủi ro & Kiểm soát", "risk_governance"),
-            ("⌁  Kịch bản & Mô phỏng", "scenario_lab"),
-        ],
-    ),
-    (
-        "QUẢN TRỊ DOANH NGHIỆP",
-        [
-            ("⌁  Con người & ESG", "people_esg"),
-            ("⌁  Báo cáo Hội đồng", "board_reporting"),
-            ("⌁  Dữ liệu & Chất lượng", "data_quality"),
-            ("⌁  Trợ lý điều hành", "copilot"),
-        ],
-    ),
+    ("⌂  Tổng quan điều hành", "command_center"),
+    ("⌁  Chiến lược & Hiệu quả", "strategy"),
+    ("⌁  Thương mại & Tăng trưởng", "commercial"),
+    ("⌁  Tài chính & Nguồn vốn", "finance"),
+    ("⌁  Đại lý 360°", "dealer_360"),
+    ("⌁  Vận hành & Aftersales", "operations"),
+    ("⌁  Rủi ro & Kiểm soát", "risk_governance"),
+    ("⌁  Kịch bản & Mô phỏng", "scenario_lab"),
+    ("⌁  Con người & ESG", "people_esg"),
+    ("⌁  Báo cáo HĐQT", "board_reporting"),
+    ("⌁  Dữ liệu & Chất lượng", "data_quality"),
+    ("⌁  Trợ lý điều hành", "copilot"),
 ]
 
 if "module_v7_exact" not in st.session_state:
@@ -459,7 +432,7 @@ with st.sidebar:
             align-items:center;
             gap:9px;
             padding:6px 7px 10px 7px;
-            margin-bottom:3px;
+            margin-bottom:8px;
             border-bottom:1px solid #1a3048;
         ">
             <div style="
@@ -484,18 +457,36 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
 
-    for group, entries in MENU:
-        st.markdown(f'<div class="side-mini-title">{group}</div>', unsafe_allow_html=True)
-        for label, module_name in entries:
-            active = st.session_state["module_v7_exact"] == module_name
-            if st.button(
-                label,
-                key=f"menu_exact_{module_name}",
-                type="primary" if active else "secondary",
-                use_container_width=True,
-            ):
-                st.session_state["module_v7_exact"] = module_name
-                st.rerun()
+    with st.popover("📤 Tải Master Excel V7", use_container_width=True):
+        st.caption("Tải file dữ liệu hoặc file Master mẫu")
+        sidebar_upload = st.file_uploader(
+            "Chọn file Excel",
+            type=["xlsx"],
+            label_visibility="collapsed",
+            key="sidebar_upload_master_v7",
+        )
+        st.download_button(
+            "⬇ Tải Master mẫu",
+            FILE_MASTER.read_bytes(),
+            FILE_MASTER.name,
+            use_container_width=True,
+        )
+
+    st.markdown(
+        '<div style="height:7px;border-bottom:1px solid #1a3048;margin-bottom:7px;"></div>',
+        unsafe_allow_html=True,
+    )
+
+    for label, module_name in MENU:
+        active = st.session_state["module_v7_exact"] == module_name
+        if st.button(
+            label,
+            key=f"menu_exact_{module_name}",
+            type="primary" if active else "secondary",
+            use_container_width=True,
+        ):
+            st.session_state["module_v7_exact"] = module_name
+            st.rerun()
 
     st.markdown(
         """
@@ -506,6 +497,20 @@ with st.sidebar:
         """,
         unsafe_allow_html=True,
     )
+
+if sidebar_upload is not None:
+    try:
+        uploaded_data = tai_du_lieu(sidebar_upload.getvalue())
+        dm = uploaded_data.tables["Don_vi"]
+        brand = st.session_state.get("brand_v7_exact", "Tất cả thương hiệu")
+        dealer = st.session_state.get("dealer_v7_exact", "Tất cả đại lý")
+        available_brands = sorted(dm["Thương hiệu"].dropna().unique().tolist())
+        brand_filter = available_brands if brand == "Tất cả thương hiệu" else [brand]
+        dealer_filter = None if dealer == "Tất cả đại lý" else [dealer]
+        du_lieu_loc = filter_data(uploaded_data, brand_filter, dealer_filter)
+    except Exception as exc:
+        st.sidebar.error(f"File tải lên không hợp lệ: {exc}")
+
 
 try:
     selected_module = st.session_state["module_v7_exact"]

@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from model import enterprise_metrics, dealer_health
-from ui import bieu_do_toi
+from ui import bieu_do_toi, dich_gia_tri
 
 
 def _risk_donut(data):
@@ -164,6 +164,9 @@ def render(data, scenario):
                 "SLA": "Hạn xử lý",
             }
         )
+        for column in display.columns:
+            if display[column].dtype == "object":
+                display[column] = display[column].map(dich_gia_tri)
         st.markdown("##### PHÁT HIỆN ƯU TIÊN")
         st.dataframe(
             display,
