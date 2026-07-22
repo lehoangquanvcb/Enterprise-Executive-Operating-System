@@ -167,6 +167,9 @@ def render(data, scenario):
         for column in display.columns:
             if display[column].dtype == "object":
                 display[column] = display[column].map(dich_gia_tri)
+        for column in display.columns:
+            if display[column].dtype == "object":
+                display[column] = display[column].map(dich_gia_tri)
         st.markdown("##### PHÁT HIỆN ƯU TIÊN")
         st.dataframe(
             display,

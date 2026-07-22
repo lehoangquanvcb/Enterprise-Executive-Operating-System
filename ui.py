@@ -54,157 +54,44 @@ DOI_TEN_COT = {
     "On-time Delivery": "Tỷ lệ giao đúng hạn",
     "Spend YTD (tỷ)": "Chi tiêu lũy kế (tỷ)",
     "Cash Conversion Cycle": "Chu kỳ chuyển đổi tiền mặt",
-    "Lead→Order": "Lead→Đơn hàng",
+    "Lead→Order": "Khách hàng tiềm năng→Đơn hàng",
     "Order→Delivery": "Đơn hàng→Giao xe",
-    "Lead→Delivery": "Lead→Giao xe",
+    "Lead→Delivery": "Khách hàng tiềm năng→Giao xe",
     "Traffic Light": "Mức cảnh báo KPI",
+    "Lead": "Khách hàng tiềm năng",
+    "Lost": "Không chuyển đổi",
+    "Test drive": "Lái thử",
+    "Pipeline": "Cơ hội bán hàng",
 }
 
 DOI_GIA_TRI = {
-    # Board pack
-    "Executive Summary": "Tóm tắt điều hành",
-    "Strategic Performance": "Hiệu quả chiến lược",
-    "Financial Performance": "Hiệu quả tài chính",
-    "Cash & Working Capital": "Tiền mặt & Vốn lưu động",
-    "Commercial Performance": "Hiệu quả thương mại",
-    "Dealer Portfolio": "Danh mục đại lý",
-    "Risk & Governance": "Rủi ro & Quản trị",
-    "Investment & PMO": "Đầu tư & Quản lý dự án",
-    "People & ESG": "Con người & ESG",
-    "Decisions Required": "Các quyết định cần phê duyệt",
-    "Command Center": "Trung tâm điều hành",
-    "Strategy & KPI": "Chiến lược & KPI",
-    "Dealer P&L": "P&L đại lý",
-    "13-Week Cash": "Dòng tiền 13 tuần",
-    "Commercial Funnel": "Phễu thương mại",
-    "Dealer 360": "Đại lý 360°",
-    "Risk & EWS": "Rủi ro & Cảnh báo sớm",
-    "Chairman Office": "Văn phòng Chủ tịch",
-    "Project delivery, CAPEX and investment decisions":
-        "Tiến độ dự án, CAPEX và các quyết định đầu tư",
-    "People / ESG": "Con người / ESG",
-    "PMO & Investment": "Quản lý dự án & Đầu tư",
-    "Revenue, EBITDA, liquidity, EWS and decisions":
-        "Doanh thu, EBITDA, thanh khoản, cảnh báo sớm và quyết định",
-    "Strategy map, KPI attainment and key gaps":
-        "Bản đồ chiến lược, mức độ hoàn thành KPI và các khoảng cách trọng yếu",
-    "Dealer contribution, margin and variance":
-        "Đóng góp của đại lý, biên lợi nhuận và phân tích chênh lệch",
-    "Cash runway, CCC and inventory release":
-        "Khả năng duy trì tiền mặt, chu kỳ tiền mặt và giải phóng tồn kho",
-    "Lead conversion, orders and deliveries":
-        "Chuyển đổi khách hàng, đơn hàng và giao xe",
-    "Health score and value-at-risk dealers":
-        "Điểm sức khỏe và các đại lý có giá trị gặp rủi ro",
-    "Top risks, audit findings and control breaches":
-        "Rủi ro trọng yếu, phát hiện kiểm toán và vi phạm kiểm soát",
-    "Project delivery, CAPEX and investment decisions":
-        "Tiến độ dự án, CAPEX và quyết định đầu tư",
-    "Capability, succession and sustainability":
-        "Năng lực, kế nhiệm và phát triển bền vững",
-    "Decision backlog and recommended approvals":
-        "Các quyết định tồn đọng và đề xuất phê duyệt",
-    "Mandatory": "Bắt buộc",
-    "Optional": "Tùy chọn",
-    "Board": "HĐQT",
-    "Board/CFO": "HĐQT/CFO",
-    "CEO/COO": "CEO/COO",
+    "High": "Cao", "Medium": "Trung bình", "Low": "Thấp",
+    "Green": "Xanh", "Amber": "Vàng", "Red": "Đỏ",
+    "Base": "Cơ sở", "Upside": "Tích cực", "Downside": "Bất lợi",
+    "Open": "Đang mở", "Closed": "Đã đóng",
+    "In Progress": "Đang thực hiện", "Not Started": "Chưa bắt đầu",
+    "At Risk": "Có rủi ro", "Completed": "Hoàn thành",
+    "Overdue": "Quá hạn", "Mandatory": "Bắt buộc",
+    "Optional": "Tùy chọn", "Compliant": "Tuân thủ",
+    "Conditional": "Có điều kiện", "Non-compliant": "Không tuân thủ",
+    "Renew": "Gia hạn", "Renegotiate": "Đàm phán lại",
+    "Monitor": "Theo dõi", "Exit": "Chấm dứt",
+    "Actual": "Thực hiện", "Forecast": "Dự báo", "Budget": "Kế hoạch",
+    "New": "Mới", "Contacted": "Đã liên hệ", "Qualified": "Đạt chuẩn",
+    "Test Drive": "Lái thử", "Negotiation": "Đàm phán",
+    "Order": "Đơn hàng", "Lost": "Không chuyển đổi",
+    "Digital": "Kênh số", "Walk-in": "Khách trực tiếp",
+    "Referral": "Giới thiệu", "Corporate/Fleet": "Doanh nghiệp/Đội xe",
+    "Event": "Sự kiện", "Normal": "Bình thường",
+    "Priority": "Ưu tiên", "Hot": "Nóng",
+    "Delivered": "Đã giao", "In Transit": "Đang vận chuyển",
+    "Awaiting Registration": "Chờ đăng ký", "Ready": "Sẵn sàng",
+    "Yes": "Có", "No": "Không", "Pending": "Đang chờ",
+    "Cash": "Tiền mặt", "Bank Loan": "Vay ngân hàng",
+    "Leasing": "Thuê tài chính", "BREACH": "VI PHẠM", "OK": "Đạt",
+    "Chairman": "Chủ tịch", "Chairman/CEO": "Chủ tịch/CEO",
+    "Board": "HĐQT", "Board/CFO": "HĐQT/CFO",
     "Audit Committee": "Ủy ban Kiểm toán",
-    "Chairman": "Chủ tịch",
-    "Chairman/CEO": "Chủ tịch/CEO",
-
-    # Generic status / severity
-    "Base": "Cơ sở",
-    "Upside": "Tích cực",
-    "Downside": "Bất lợi",
-    "Green": "Xanh",
-    "Amber": "Vàng",
-    "Red": "Đỏ",
-    "High": "Cao",
-    "Medium": "Trung bình",
-    "Low": "Thấp",
-    "Open": "Đang mở",
-    "Closed": "Đã đóng",
-    "In Progress": "Đang thực hiện",
-    "Not Started": "Chưa bắt đầu",
-    "At Risk": "Có rủi ro",
-    "Completed": "Hoàn thành",
-    "Overdue": "Quá hạn",
-    "Compliant": "Tuân thủ",
-    "Conditional": "Có điều kiện",
-    "Non-compliant": "Không tuân thủ",
-    "Renew": "Gia hạn",
-    "Renegotiate": "Đàm phán lại",
-    "Monitor": "Theo dõi",
-    "Exit": "Chấm dứt",
-    "Actual": "Thực hiện",
-    "Forecast": "Dự báo",
-    "Budget": "Kế hoạch",
-
-    # Funnel / lead / governance
-    "New": "Mới",
-    "Contacted": "Đã liên hệ",
-    "Qualified": "Đạt chuẩn",
-    "Test Drive": "Lái thử",
-    "Negotiation": "Đàm phán",
-    "Order": "Đơn hàng",
-    "Lost": "Thất bại",
-    "Digital": "Kênh số",
-    "Walk-in": "Khách trực tiếp",
-    "Referral": "Giới thiệu",
-    "Corporate/Fleet": "Doanh nghiệp/Đội xe",
-    "Event": "Sự kiện",
-    "Normal": "Bình thường",
-    "Priority": "Ưu tiên",
-    "Hot": "Nóng",
-    "Delivered": "Đã giao",
-    "In Transit": "Đang vận chuyển",
-    "Awaiting Registration": "Chờ đăng ký",
-    "Ready": "Sẵn sàng",
-    "Yes": "Có",
-    "No": "Không",
-    "Pending": "Đang chờ",
-    "Cash": "Tiền mặt",
-    "Bank Loan": "Vay ngân hàng",
-    "Leasing": "Thuê tài chính",
-    "BREACH": "VI PHẠM",
-    "OK": "Đạt",
-
-    # Executive brief
-    "Liquidity": "Thanh khoản",
-    "Inventory": "Tồn kho",
-    "Sales Funnel": "Phễu bán hàng",
-    "Margin": "Biên lợi nhuận",
-    "Customer": "Khách hàng",
-    "Governance": "Quản trị",
-    "13-week cash headroom falls below management buffer in week 9":
-        "Mức đệm tiền mặt 13 tuần giảm dưới ngưỡng quản trị tại tuần 9",
-    "Approve temporary inventory cap and weekly cash war-room":
-        "Phê duyệt giới hạn tồn kho tạm thời và họp điều hành tiền mặt hàng tuần",
-    "Three dealers show composite inventory risk above 80":
-        "Ba đại lý có điểm rủi ro tồn kho tổng hợp trên 80",
-    "Reallocate stock and activate model-specific campaigns":
-        "Tái phân bổ tồn kho và triển khai chiến dịch theo từng mẫu xe",
-    "Lead-to-order conversion below target at selected EV dealers":
-        "Tỷ lệ chuyển đổi lead sang đơn hàng dưới mục tiêu tại một số đại lý xe điện",
-    "Launch conversion sprint and coaching by salesperson":
-        "Triển khai chương trình tăng tốc chuyển đổi và huấn luyện nhân viên bán hàng",
-    "Discount leakage concentrated in 12 transactions":
-        "Rò rỉ chiết khấu tập trung tại 12 giao dịch",
-    "Review delegation and block discounts beyond approval threshold":
-        "Rà soát phân quyền và chặn chiết khấu vượt ngưỡng phê duyệt",
-    "Delivery delays correlate with lower CSI":
-        "Giao xe chậm có tương quan với điểm CSI thấp hơn",
-    "Escalate registration and logistics bottlenecks":
-        "Xử lý ở cấp cao hơn các điểm nghẽn đăng ký và logistics",
-    "Open audit findings exceed remediation SLA":
-        "Các phát hiện kiểm toán chưa đóng đã vượt thời hạn khắc phục",
-    "Assign accountable executives and report weekly":
-        "Chỉ định lãnh đạo chịu trách nhiệm và báo cáo hàng tuần",
-    "48 hours": "48 giờ",
-    "72 hours": "72 giờ",
-    "7 days": "7 ngày",
-    "14 days": "14 ngày",
 }
 
 
@@ -220,25 +107,28 @@ def chen_css() -> None:
     st.markdown(f"""
     <style>
     .stApp {{background:{MAU['nen']};color:{MAU['chu']};}}
-    [data-testid="stSidebar"] {{background:{MAU['be_mat']};border-right:1px solid {MAU['vien']};}}
-    .block-container {{padding-top:.55rem;padding-bottom:2rem;max-width:1720px;}}
+    [data-testid="stSidebar"] {{
+        background:linear-gradient(180deg,#091729 0%,#071421 100%);
+        border-right:1px solid {MAU['vien']};
+    }}
+    .block-container {{
+        padding-top:.35rem;
+        padding-bottom:1.5rem;
+        max-width:1680px;
+    }}
     div[data-testid="stMetric"] {{
-      background:linear-gradient(145deg,{MAU['be_mat']},{MAU['be_mat_2']});
-      border:1px solid {MAU['vien']};border-radius:14px;padding:13px;
-      box-shadow:0 5px 18px rgba(0,0,0,.22);
+        background:linear-gradient(145deg,{MAU['be_mat']},{MAU['be_mat_2']});
+        border:1px solid {MAU['vien']};
+        border-radius:9px;
+        padding:11px 12px;
+        box-shadow:none;
     }}
     div[data-testid="stMetricLabel"] {{color:{MAU['chu_phu']};}}
     div[data-testid="stMetricValue"] {{color:#F8FAFC;}}
-    .exec-card {{
-      background:{MAU['be_mat']};border:1px solid {MAU['vien']};
-      border-left:5px solid {MAU['chinh']};padding:13px 16px;
-      border-radius:9px;margin:7px 0;color:{MAU['chu']};
+    div[data-testid="stDataFrame"] {{
+        border:1px solid {MAU['vien']};
+        border-radius:9px;
     }}
-    .critical {{border-left-color:{MAU['nghiem_trong']};}}
-    .warning {{border-left-color:{MAU['canh_bao']};}}
-    .positive {{border-left-color:{MAU['tich_cuc']};}}
-    .info {{border-left-color:{MAU['thong_tin']};}}
-    div[data-testid="stDataFrame"] {{border:1px solid {MAU['vien']};border-radius:10px;}}
     </style>
     """, unsafe_allow_html=True)
 
@@ -266,19 +156,20 @@ def tieu_de_trang(tieu_de: str, phu_de: str | None = None) -> None:
 
 def the_dieu_hanh(chu_de, phat_hien, khuyen_nghi, phu_trach, thoi_han, muc_do="warning") -> None:
     st.markdown(
-        f'<div class="exec-card {muc_do}"><b>{dich_gia_tri(chu_de)}</b> — '
-        f'{dich_gia_tri(phat_hien)}<br>'
-        f'<b>Khuyến nghị:</b> {dich_gia_tri(khuyen_nghi)} · '
-        f'<b>Phụ trách:</b> {dich_gia_tri(phu_trach)} · '
-        f'<b>Thời hạn:</b> {dich_gia_tri(thoi_han)}</div>',
+        f'<div style="background:#0C192B;border:1px solid #1F3550;'
+        f'border-left:4px solid #F59E0B;padding:11px 14px;border-radius:8px;'
+        f'margin:7px 0;"><b>{dich_gia_tri(chu_de)}</b> — '
+        f'{dich_gia_tri(phat_hien)}<br><b>Khuyến nghị:</b> '
+        f'{dich_gia_tri(khuyen_nghi)} · <b>Phụ trách:</b> '
+        f'{dich_gia_tri(phu_trach)} · <b>Thời hạn:</b> '
+        f'{dich_gia_tri(thoi_han)}</div>',
         unsafe_allow_html=True,
     )
 
 
 def dong_chi_so(danh_sach) -> None:
     cot = st.columns(len(danh_sach))
-    for c, muc in zip(cot, danh_sach):
-        nhan, gia_tri, thay_doi = muc
+    for c, (nhan, gia_tri, thay_doi) in zip(cot, danh_sach):
         c.metric(nhan, gia_tri, thay_doi)
 
 
