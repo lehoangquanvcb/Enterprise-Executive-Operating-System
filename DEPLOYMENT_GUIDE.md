@@ -1,31 +1,38 @@
 
-# Deployment Guide
+# V6 Deployment Guide
+
+## Important cleanup
+
+Before copying V6 into an existing repository, remove old project contents, especially:
+
+```text
+pages/
+modules/
+__pycache__/
+Enterprise_Executive_Operating_System_Master_V5.xlsx
+```
+
+Do not delete the `.git` directory.
+
+Then copy all V6 files into the repository folder.
 
 ## Local verification
+
 ```bash
-cd /d E:\Enterprise-Executive-Operating-System
 python -m pip install -r requirements.txt
 python -m streamlit run app.py
 ```
 
 ## Existing repository update
+
 ```bash
 git add .
-git commit -m "Release V5 Full"
+git commit -m "Release V6 Consolidated Enterprise Edition"
 git push
 ```
 
-## New repository
-```bash
-git init
-git branch -M main
-git add .
-git commit -m "Initial release of Enterprise Executive Operating System"
-git remote add origin https://github.com/lehoangquanvcb/Enterprise-Executive-Operating-System.git
-git push -u origin main
-```
+## Streamlit Community Cloud
 
-Streamlit Cloud:
-- Repository: lehoangquanvcb/Enterprise-Executive-Operating-System
-- Branch: main
-- Main file: app.py
+- Repository: `lehoangquanvcb/Enterprise-Executive-Operating-System`
+- Branch: `main`
+- Main file path: `app.py`
