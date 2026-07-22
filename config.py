@@ -3,9 +3,9 @@ from pathlib import Path
 
 TEN_UNG_DUNG = "Hệ thống Điều hành Doanh nghiệp"
 PHU_DE = "Trung tâm Điều hành Bán lẻ Ô tô"
-PHIEN_BAN = "V7 – Việt hóa & Giao diện ngang"
+PHIEN_BAN = "V7"
 TAC_GIA = "Lê Hoàng Quân"
-FILE_MASTER = Path(__file__).with_name("Enterprise_Executive_Operating_System_Master_V7.xlsx")
+FILE_MASTER = Path(__file__).with_name("Enterprise_Executive_Operating_System_Master.xlsx")
 
 MAU = {
     "nen": "#0B1220",
